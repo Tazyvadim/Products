@@ -1,0 +1,10 @@
+mysql-data*
+dist
+logs
+*.DS_Store
+*.log
+.idea
+.vscode
+app/node_modules/*
+app/.env
+db-dump/old/data/*
