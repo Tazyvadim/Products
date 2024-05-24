@@ -21,7 +21,7 @@ describe("Product controller tests - update product PUT /products/:productId", (
         await AppDataSource.initialize();
         await apiServer.start();
     });
-    
+
     afterEach(async () => {
         await AppDataSource.destroy();
         await apiServer.stop();
@@ -45,7 +45,7 @@ describe("Product controller tests - update product PUT /products/:productId", (
             password: '123',
             passwordConfirm: '123'
         });
-        let res = await apiRequest.put("/products/dasd", {}, {
+        const res = await apiRequest.put("/products/dasd", {}, {
             headers: {
                 Authorization: authInfo.authToken,
             },
@@ -85,7 +85,7 @@ describe("Product controller tests - update product PUT /products/:productId", (
             passwordConfirm: '123'
         });
 
-        let res = await apiRequest.put("/products/1", {
+        const res = await apiRequest.put("/products/1", {
             title: 'title2',
             price: 231,
             category: ProductCategory.FirstCategory
@@ -114,7 +114,7 @@ describe("Product controller tests - update product PUT /products/:productId", (
             description: 'some descr'
         });
 
-        let res = await apiRequest.put(`/products/${product.id}`, {
+        const res = await apiRequest.put(`/products/${product.id}`, {
             title: 'title2',
             price: 231,
             category: ProductCategory.SecondCategory,
@@ -124,11 +124,11 @@ describe("Product controller tests - update product PUT /products/:productId", (
                 Authorization: authInfo.authToken,
             },
         });
-        
+
         expect(res.status).to.eq(200);
 
-        const em = AppDataSource.manager
-        const [productFromDb, ...entities] = await em.find(Product, {})
+        const em = AppDataSource.manager;
+        const [productFromDb, ...entities] = await em.find(Product, {});
 
         expect(productFromDb).to.have.property('createdAt');
         delete productFromDb.createdAt;
@@ -140,4 +140,4 @@ describe("Product controller tests - update product PUT /products/:productId", (
             description: null,
         });
     });
-})
+});

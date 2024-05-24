@@ -20,7 +20,7 @@ describe("Product controller tests - get product list GET /products", () => {
         await AppDataSource.initialize();
         await apiServer.start();
     });
-    
+
     afterEach(async () => {
         await AppDataSource.destroy();
         await apiServer.stop();
@@ -44,7 +44,7 @@ describe("Product controller tests - get product list GET /products", () => {
             password: '123',
             passwordConfirm: '123'
         });
-        let res = await apiRequest.get("/products", {
+        const res = await apiRequest.get("/products", {
             headers: {
                 Authorization: authInfo.authToken,
             },
@@ -81,14 +81,14 @@ describe("Product controller tests - get product list GET /products", () => {
         });
 
         expect(res.status).to.eq(200);
-        expect(res.data).to.have.property('items')
-        expect(res.data.items.length).to.deep.eq(2)
-        expect(res.data).to.have.property('meta')
+        expect(res.data).to.have.property('items');
+        expect(res.data.items.length).to.deep.eq(2);
+        expect(res.data).to.have.property('meta');
         expect(res.data.meta).to.deep.eq(
-            { 
+            {
                 count: 2,
                 pageNum: 1,
-                pageSize: 20 
+                pageSize: 20
             }
         );
 
@@ -99,14 +99,14 @@ describe("Product controller tests - get product list GET /products", () => {
         });
 
         expect(res.status).to.eq(200);
-        expect(res.data).to.have.property('items')
-        expect(res.data.items.length).to.deep.eq(1)
-        expect(res.data).to.have.property('meta')
+        expect(res.data).to.have.property('items');
+        expect(res.data.items.length).to.deep.eq(1);
+        expect(res.data).to.have.property('meta');
         expect(res.data.meta).to.deep.eq(
-            { 
+            {
                 count: 1,
                 pageNum: 1,
-                pageSize: 20 
+                pageSize: 20
             }
         );
     });

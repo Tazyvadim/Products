@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, Generated, Index, DeleteDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, Generated, Index, DeleteDateColumn, CreateDateColumn } from "typeorm";
 import { ProductCategory } from "../../lib/types";
 
 @Entity()
@@ -6,7 +6,7 @@ export default class Product {
     @PrimaryGeneratedColumn()
     public id: number;
 
-    @Column({ type: 'varchar', length: 255})
+    @Column({ type: 'varchar', length: 255, nullable: false })
     @Index()
     public title: string;
 
@@ -21,9 +21,6 @@ export default class Product {
     @Column({ type: "enum", enum: ProductCategory, nullable: false })
     public category: ProductCategory;
 
-    @Column({
-        default: () => "CURRENT_TIMESTAMP",
-        type: "timestamp"
-    })
+    @CreateDateColumn({ name: 'createdAt'})
     public createdAt: Date;
 }

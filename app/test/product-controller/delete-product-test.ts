@@ -21,12 +21,12 @@ describe("Product controller tests - delete product by id Delete /products/:prod
         await AppDataSource.initialize();
         await apiServer.start();
     });
-    
+
     afterEach(async () => {
         await AppDataSource.destroy();
         await apiServer.stop();
     });
-    
+
     it ("should check auth", async () => {
         const authInfo = await registerAndLoginUser({
             login: 'login1',
@@ -36,7 +36,7 @@ describe("Product controller tests - delete product by id Delete /products/:prod
         });
         const res = await apiRequest.delete("/products/1", {});
         expect(res.status).to.eq(401);
-    }); 
+    });
 
     it ("should validate input data", async () => {
         const authInfo = await registerAndLoginUser({
@@ -45,7 +45,7 @@ describe("Product controller tests - delete product by id Delete /products/:prod
             password: '123',
             passwordConfirm: '123'
         });
-        let res = await apiRequest.get("/products/dasd", {
+        const res = await apiRequest.get("/products/dasd", {
             headers: {
                 Authorization: authInfo.authToken,
             },
@@ -73,7 +73,7 @@ describe("Product controller tests - delete product by id Delete /products/:prod
             passwordConfirm: '123'
         });
 
-        let res = await apiRequest.delete("/products/1", {
+        const res = await apiRequest.delete("/products/1", {
             headers: {
                 Authorization: authInfo.authToken,
             },
@@ -98,17 +98,17 @@ describe("Product controller tests - delete product by id Delete /products/:prod
             description: 'some descr'
         });
 
-        let res = await apiRequest.delete(`/products/${product.id}`, {
+        const res = await apiRequest.delete(`/products/${product.id}`, {
             headers: {
                 Authorization: authInfo.authToken,
             },
         });
 
         expect(res.status).to.eq(204);
-        
-        const em = AppDataSource.manager
-        const products = await em.find(Product, {})
 
-        expect(products.length).to.deep.eq(0)
+        const em = AppDataSource.manager;
+        const products = await em.find(Product, {});
+
+        expect(products.length).to.deep.eq(0);
     });
 });

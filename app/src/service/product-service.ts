@@ -31,6 +31,7 @@ export class ProductService implements IProductService {
     product.price = data.price;
     product.category = data.category;
     product.description = data.description ? data.description : null;
+
     await em.save(product);
 
     return {

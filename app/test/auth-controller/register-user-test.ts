@@ -18,7 +18,7 @@ describe("Auth controller tests - registration user POST /register", () => {
         await AppDataSource.initialize();
         await apiServer.start();
     });
-    
+
     afterEach(async () => {
         await AppDataSource.destroy();
         await apiServer.stop();
@@ -53,7 +53,7 @@ describe("Auth controller tests - registration user POST /register", () => {
     });
 
     it ("should register new user if he is not exists", async () => {
-        let res = await apiRequest.post("/register", {
+        const res = await apiRequest.post("/register", {
             login: "login1",
             name: "name",
             password: '123',
@@ -61,9 +61,9 @@ describe("Auth controller tests - registration user POST /register", () => {
         });
 
         expect(res.status).to.eq(200);
-        expect(res.data).to.have.property('login')
-        expect(res.data.login).to.deep.eq('login1')
-        expect(res.data).to.have.property('uuid')
+        expect(res.data).to.have.property('login');
+        expect(res.data.login).to.deep.eq('login1');
+        expect(res.data).to.have.property('uuid');
     });
 
     it ("should throw error if user already exists", async () => {
@@ -87,4 +87,4 @@ describe("Auth controller tests - registration user POST /register", () => {
             error: "userAlreadyExists", statusCode: 409,
         });
     });
-})
+});

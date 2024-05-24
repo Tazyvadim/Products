@@ -20,7 +20,7 @@ describe("Product controller tests - get product by id GET /products/:productId"
         await AppDataSource.initialize();
         await apiServer.start();
     });
-    
+
     afterEach(async () => {
         await AppDataSource.destroy();
         await apiServer.stop();
@@ -44,7 +44,7 @@ describe("Product controller tests - get product by id GET /products/:productId"
             password: '123',
             passwordConfirm: '123'
         });
-        let res = await apiRequest.get("/products/dasd", {
+        const res = await apiRequest.get("/products/dasd", {
             headers: {
                 Authorization: authInfo.authToken,
             },
@@ -72,7 +72,7 @@ describe("Product controller tests - get product by id GET /products/:productId"
             passwordConfirm: '123'
         });
 
-        let res = await apiRequest.get("/products/1", {
+        const res = await apiRequest.get("/products/1", {
             headers: {
                 Authorization: authInfo.authToken,
             },
@@ -97,14 +97,14 @@ describe("Product controller tests - get product by id GET /products/:productId"
             description: 'some descr'
         });
 
-        let res = await apiRequest.get(`/products/${product.id}`, {
+        const res = await apiRequest.get(`/products/${product.id}`, {
             headers: {
                 Authorization: authInfo.authToken,
             },
         });
 
         expect(res.status).to.eq(200);
-        expect(res.data).to.have.property('createdAt')
+        expect(res.data).to.have.property('createdAt');
         delete res.data.createdAt;
         expect(res.data).to.deep.eq({
             id: product.id,
@@ -112,6 +112,6 @@ describe("Product controller tests - get product by id GET /products/:productId"
             price: product.price,
             category: product.category,
             description: product.description
-        })
+        });
     });
 });

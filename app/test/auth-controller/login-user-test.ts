@@ -19,7 +19,7 @@ describe("Auth controller tests - login user POST /login", () => {
         await AppDataSource.initialize();
         await apiServer.start();
     });
-    
+
     afterEach(async () => {
         await AppDataSource.destroy();
         await apiServer.stop();
@@ -64,7 +64,7 @@ describe("Auth controller tests - login user POST /login", () => {
             name: 'name1',
             password: '123',
             passwordConfirm: '123'
-        })
+        });
 
         const res = await apiRequest.post("/login", {
             login: "login1",
@@ -82,7 +82,7 @@ describe("Auth controller tests - login user POST /login", () => {
             name: 'name1',
             password: '123',
             passwordConfirm: '123'
-        })
+        });
 
         const res = await apiRequest.post("/login", {
             login: "login1",
@@ -92,5 +92,5 @@ describe("Auth controller tests - login user POST /login", () => {
         expect(res.status).to.eq(200);
         expect(res.data).to.have.property('userUuid');
         expect(res.data).to.have.property('authToken');
-    })
-})
+    });
+});

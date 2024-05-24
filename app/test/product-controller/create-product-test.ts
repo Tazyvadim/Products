@@ -20,7 +20,7 @@ describe("Product controller tests - create product POST /products", () => {
         await AppDataSource.initialize();
         await apiServer.start();
     });
-    
+
     afterEach(async () => {
         await AppDataSource.destroy();
         await apiServer.stop();
@@ -133,7 +133,7 @@ describe("Product controller tests - create product POST /products", () => {
             price: 123,
             category: ProductCategory.FirstCategory,
             description: null
-        })
+        });
 
         res = await apiRequest.post("/products", {
             title: 'product2',
@@ -156,6 +156,6 @@ describe("Product controller tests - create product POST /products", () => {
             price: 3123,
             category: ProductCategory.SecondCategory,
             description: 'some desctiption'
-        })
+        });
     });
-})
+});
