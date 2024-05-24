@@ -3,7 +3,6 @@ import { sign } from "jsonwebtoken";
 import {
   UserAlreadyExistsError,
   UserNotFoundError,
-  UserUnauthorizedError,
   WrongConfirmPasswordError,
   WrongPasswordError,
 } from "../lib/errors";
