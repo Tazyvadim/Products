@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, Generated, Index, DeleteDateColumn, CreateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, Generated, Index, DeleteDateColumn, CreateDateColumn, ManyToOne } from "typeorm";
 import { ProductCategory } from "../../lib/types";
+import User from "./user";
 
 @Entity()
 export default class Product {
@@ -20,6 +21,10 @@ export default class Product {
     // but for test project enum can be used
     @Column({ type: "enum", enum: ProductCategory, nullable: false })
     public category: ProductCategory;
+
+    // if bussines need to controll what user created product
+    // @ManyToOne(type => User, user => user.products, { lazy: true })
+    // public user: User;
 
     @CreateDateColumn({ name: 'createdAt'})
     public createdAt: Date;

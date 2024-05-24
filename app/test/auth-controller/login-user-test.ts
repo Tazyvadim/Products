@@ -71,8 +71,8 @@ describe("Auth controller tests - login user POST /login", () => {
             password: '132'
         });
 
-        expect(res.status).to.eq(401);
-        expect(res.data).to.deep.eq({ error: "wrongPasswordError", statusCode: 401 });
+        expect(res.status).to.eq(409);
+        expect(res.data).to.deep.eq({ error: "wrongPasswordError", statusCode: 409 });
     });
 
 

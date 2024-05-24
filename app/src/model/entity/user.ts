@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, Generated, Index, DeleteDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, Generated, Index, DeleteDateColumn, OneToMany } from "typeorm";
+import Product from "./product";
 
 @Entity()
 export default class User {
@@ -25,6 +26,10 @@ export default class User {
     })
     public createdAt: Date;
 
+    // if bussines need to controll what user created product
+    // @OneToMany(type => Product, product => product.user, { lazy: true })
+    // public products: Product[];
+ 
     @DeleteDateColumn()
     public deletedAt: Date;
 }

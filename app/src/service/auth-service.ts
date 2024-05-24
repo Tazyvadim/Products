@@ -14,8 +14,8 @@ import { UserLoginAid, UserRegisterAid } from "../model/aids/auth.aids";
 import { AuthInfoDto, UserRegisterInfoDto } from "../model/dtos/auth.dto";
 
 export abstract class IAuthService {
-  public abstract login(dto: UserLoginAid): Promise<AuthInfoDto>;
-  public abstract register(dto: UserRegisterAid): Promise<UserRegisterInfoDto>;
+  public abstract login(data: UserLoginAid): Promise<AuthInfoDto>;
+  public abstract register(data: UserRegisterAid): Promise<UserRegisterInfoDto>;
   public abstract createToken(userId: number): string;
 }
 
@@ -44,23 +44,23 @@ export class AuthService implements IAuthService {
   }
 
   @ValidateParams(UserRegisterAid)
-  public async register(dto: UserRegisterAid): Promise<UserRegisterInfoDto> {
+  public async register(data: UserRegisterAid): Promise<UserRegisterInfoDto> {
     const em = AppDataSource.manager;
 
-    let user = await em.findOne(User, { where: { login: dto.login } });
+    let user = await em.findOne(User, { where: { login: data.login } });
     if (user) {
       throw new UserAlreadyExistsError();
     }
 
-    if (dto.password !== dto.passwordConfirm) {
+    if (data.password !== data.passwordConfirm) {
       throw new WrongConfirmPasswordError();
     }
 
     await em.transaction(async (manager) => {
       user = new User();
-      user.login = dto.login;
-      user.name = dto.name;
-      user.password = crypto.createHmac("md5", dto.password).digest("hex");
+      user.login = data.login;
+      user.name = data.name;
+      user.password = crypto.createHmac("md5", data.password).digest("hex");
       await manager.save(user);
     });
 

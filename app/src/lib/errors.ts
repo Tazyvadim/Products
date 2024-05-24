@@ -30,7 +30,7 @@ export class UserNotFoundError extends BaseError {
 export class WrongPasswordError extends BaseError {
   constructor() {
     super();
-    this.statusCode = 401;
+    this.statusCode = 409;
     this.message = "wrongPasswordError";
   }
 }
@@ -38,7 +38,7 @@ export class WrongPasswordError extends BaseError {
 export class WrongConfirmPasswordError extends BaseError {
   constructor() {
     super();
-    this.statusCode = 401;
+    this.statusCode = 409;
     this.message = "wrongPasswordError";
   }
 }
