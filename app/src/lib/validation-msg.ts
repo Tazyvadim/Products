@@ -1,3 +1,4 @@
+// emuns of Validatiom Message Erorrs
 export enum ValidationMsg {
   NotUnique = 'not_unique',
   IsDefined = 'not_defined',
@@ -8,13 +9,9 @@ export enum ValidationMsg {
   IsInt = 'wrong_value',
   IsBoolean = 'wrong_value',
   ValidateNested = 'nested_not_found',
-  IsUUID = 'wrong_value',
-  MaxEntityCount = 'max_entity_count',
   WrongValue = 'wrong_value',
   MaxLength = 'max_length',
   IsEmail = 'must_be_email',
-  Deleted = 'deleted',
   WrongPassword = 'wrong_password',
-  IsLocale = 'wrong_value',
   CannotBeAmpty = 'cannot_be_empty'
 }
